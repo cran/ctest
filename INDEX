@@ -9,5 +9,6 @@ ks.test                  Kolmogorov-Smirnov Tests
 mantelhaen.test          Mantel-Haenszel Chi-Square Test for Count Data
 mcnemar.test             McNemar's Chi-square Test for Count Data
 mood.test                Mood Two-Sample Test of Scale
+shapiro.test             Shapiro-Wilk Normality Test
 var.test                 F Test to Compare Two Variances
 wilcox.test              Wilcoxon Rank Sum and Signed Rank Tests

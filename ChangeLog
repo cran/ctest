@@ -1,3 +1,24 @@
+Sun Nov 14 22:51:32 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-19.
+
+	* R/shapiro.test.R: New file with R code for the Shapiro-Wilk
+	normality test.
+
+	* man/shapiro.test.Rd: New file documenting the Shapiro-Wilk
+	normality test.
+
+	* src/alnorm.f: New file (normal distribution function).
+	* src/nscor.f: New file (expected values of normal order
+	statistics).
+	* src/ppnd.f: New file (percentage points of the normal
+	distribution).
+	* src/prho.f: New file (tail probabilities for Spearman's rho).
+	* src/swilk.f: New file (Shapiro-Wilk normality test and P-value
+	for sample sizes 3 <= n <= 5000).
+
+	* COPYRIGHTS: New file.
+
 Sat Sep 25 10:07:52 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.9-18.
