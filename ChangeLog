@@ -1,0 +1,157 @@
+Sat Apr 10 15:45:19 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-16.
+
+	* R/ks.test.R: Do something about ties in the 2-sample case.
+	
+	* src/ansari.c (dansari, pansari): Improve handling of non-integer
+	argument `x'.
+	* src/kendall.c (dkendall, pkendall): The same.
+
+Sun Feb 28 11:14:03 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-15.
+
+	* R/wilcox.test.R: Change default value of `exact' to NULL.  By
+	default, exact p-values are now computed if the samples have less
+	than 50 finite values and there are no ties.
+
+	* man/wilcox.test.Rd: Change documentation accordingly.
+
+	* src/ansari.c: Improve by adding w_init() and w_free().
+
+Sun Feb 14 22:08:47 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-14.
+
+	* R/ansari.test.R: New file with R code for the Ansari-Bradley
+	test for a difference in scale parameters.
+
+	* R/cor.test.R: Introduce exact version for Kendall's test.  New
+	argument `exact'.
+
+	* man/ansari.test.Rd: New file documenting the Ansari-Bradley
+	test.
+
+	* man/cor.test.Rd: Document changes.
+
+	* src/ansari.c: New file, code to compute the exact distribution
+	of the Ansari-Bradley test statistic.
+
+	* src/kendall.c: Add code for computing the exact distribution of
+	Kendall's test statistic.
+
+Sat Feb 13 19:11:04 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-13.
+
+	* R/wilcox.test.R: p-values in the two-sided exact case were
+	wrong.  The signed rank test now removes zeroes.
+
+	* man/wilcox.test.Rd: Default for `exact' is `TRUE'.
+
+Sun Feb  7 17:37:49 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-12.
+
+	* R/kruskal.test.R: In the 1-arg list case, do not remove Infs as
+	these can be ranked; add a test for groups with no data.  In the
+	2-arg case, allow for NA's in both data and groups.
+
+Sun Jan 31 00:06:04 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-11.
+
+	* R/cor.test.R: Replace memory expensive computation of Kendall's
+	tau by efficient C code.
+
+	* src/kendall.c: New file.
+
+Sat Jan 30 22:10:47 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* R/bartlett.test.R: Make work for a list of linear models.
+
+	* R/var.test.R: Make work for linear models.
+
+Wed Jan 27 14:43:26 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* R/binom.test.R: In the two-sided case, compute the p-value as
+	the probability of observing a more extreme value (in the sense
+	that the pmf is not greater than that of the observed value).
+
+	* R/fisher.test.R: Use fexact() in the two-sided 2 by 2 case.
+	* man/fisher.test.Rd: Document this.
+
+Sun Jan 17 19:11:13 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-10.
+
+	* src/fexact.c: Make fexact() void as suggested by BDR.
+
+Sat Jan  2 19:15:23 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-9.
+
+	* src/fexact.c: Misc cleanups.
+
+Sun Dec  6 16:31:35 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-8.
+
+	* R/fisher.test.R: Argument `exact' has to be called `hybrid'.
+	Coerce `x' to double before .C().
+
+Sat Nov 28 23:39:59 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-7.
+
+	* R/fisher.test.R: Add code for tables larger than 2 by 2.
+
+	* man/fisher.test.Rd: Update for added support of tables larger
+	than 2 by 2.
+	* man/*.Rd: Add `\keyword{htest}'.
+
+	* src/fexact.c: New file.
+
+Sun Nov 15 15:40:04 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-6.
+
+	* R/fisher.test.R: Coerce a data frame into a matrix.
+
+Sun Sep 27 09:32:45 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-5.
+
+	* man/mood.test.Rd: New file.
+
+	* R/wilcox.test.R: First shot at implementing exact versions.
+	Also, for the rank sum test consistently use the symmetric
+	definition of the test statistic (as used in *wilcox(), too).
+
+	* man/*.Rd:  Reformat.  Split old-style description into new-style
+	description and details.
+
+Sat Mar 28 11:34:10 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-4.
+
+	* R/wilcox.test.R: Fix a problem with the adjustment of the rank
+	sum test statistic in the case of ties (reported by Jay King
+	<jking@metisrv0.man-env.com>)
+
+Sun Feb 22 10:27:49 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-3.
+
+	* README: Update Copyright.
+
+Wed Feb 18 22:14:07 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* R/friedman.test.R: Get rid of concatenating groups and blocks
+	when testing for missing values, which (currently) fails in the
+	case of factors with incompatible levels (reported by PD).
+
+	* DESCRIPTION: New file.
+
+	* ChangeLog: Finally started, current version is 0.9-2.
