@@ -13,7 +13,7 @@ static double **w;
 
 static void
 errmsg(char *s) {
-    PROBLEM "%s\n", s RECOVER(NULL_ENTRY);
+    PROBLEM "%s", s RECOVER(NULL_ENTRY);
 }
 
 void

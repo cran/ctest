@@ -1972,8 +1972,7 @@ int f11act(Sint *irow, Sint *i1, Sint *i2, Sint	*new)
   */
 int prterr(int icode, char *mes)
 {
-    PROBLEM "FEXACT error %d.\n%s\n", icode, mes
-	RECOVER(NULL_ENTRY);
+    PROBLEM "FEXACT error %d.\n%s", icode, mes RECOVER(NULL_ENTRY);
     return(0);
 }
 

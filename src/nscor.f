@@ -5,8 +5,8 @@ c
 c        Exact calculation of Normal Scores
 c
       double precision s(n2), work(4,721)
-      double precision zero, one, c, scor, ai1, ani, an, h
-      data one/1.0d0/, zero/0.0d0/, h/0.025d0/, nstep/721/
+      double precision zero, c, scor, ai1, ani, an, h
+      data zero/0.0d0/, h/0.025d0/, nstep/721/
 c
       ifault=3
       if (n2 .ne. n/2) return
