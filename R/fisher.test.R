@@ -53,7 +53,8 @@ fisher.test <- function(x, y = NULL, alternative = "two.sided",
                        as.double(1),
                        as.double(0),
                        p = as.double(0),
-                       as.integer(workspace))$p
+                       as.integer(workspace),
+                       PACKAGE = "ctest")$p
         } else
             PVAL <- .C("fexact",
                        as.integer(nr),
@@ -65,7 +66,8 @@ fisher.test <- function(x, y = NULL, alternative = "two.sided",
                        as.double(0),
                        as.double(0),
                        p = as.double(0),
-                       as.integer(workspace))$p
+                       as.integer(workspace),
+                       PACKAGE = "ctest")$p
     }
 
     structure(list(p.value = PVAL,

@@ -30,7 +30,8 @@ ansari.test <- function(x, y, alternative = "two.sided", exact = NULL) {
                as.integer(length(q)),
                p = as.double(q),
                as.integer(m),
-               as.integer(n))$p
+               as.integer(n),
+               PACKAGE = "ctest")$p
         }
         PVAL <-
             switch(alternative,

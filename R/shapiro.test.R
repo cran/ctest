@@ -14,7 +14,8 @@ shapiro.test <- function(x) {
                    single(n2),
                    w = single(1),
                    pw = single(1),
-                   ifault = integer(1))
+                   ifault = integer(1),
+                   PACKAGE = "ctest")
     if (sw$ifault != 0)
         stop("this should not happen")
     STATISTIC <- sw$w

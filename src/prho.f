@@ -1,4 +1,9 @@
-      double precision function prho(n, is, ifault)
+c     Was double precision function prho(n, is, ifault).
+c     Changed to subroutine by KH to allow for .Fortran interfacing.
+c     Also, change `prho' in the code to `pv'.
+c     And, fix a bug.
+c
+      subroutine prho(n, is, pv, ifault)
 c
 c        Algorithm AS 89   Appl. Statist. (1975) Vol.24, No. 3, P377.
 c       
@@ -8,6 +13,10 @@ c        must be greater than 1
 c
 c     Auxiliary function required: ALNORM = algorithm AS66
 c
+c     KH add/beg
+      integer n, is, ifault
+      double precision pv
+c     KH add/end
       dimension l(6)
       double precision zero, one, two, b, x, y, u, six,
      $  c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12
@@ -19,12 +28,12 @@ c
 c
 c        Test admissibility of arguments and initialize
 c
-      prho = one
+      pv = one
       ifault = 1
       if (n .le. 1) return
       ifault = 0
       if (is .le. 0) return
-      prho = zero
+      pv = zero
       if (is .gt. n * (n * n -1) / 3) return
       js = is
       if (js .ne. 2 * (js / 2)) js = js + 1
@@ -37,8 +46,11 @@ c
         nfac = nfac * i
         l(i) = i
     1 continue
-      prho = one / dble(nfac)
-      if (js .ne. n * (n * n -1) / 3) return
+      pv = one / dble(nfac)
+c     KH mod/beg
+c     This was `.ne.' in the code but `.eq.' in the paper
+      if (js .eq. n * (n * n - 1) / 3) return
+c     KH mod/end
       ifr = 0
       do 5 m = 1,nfac
         ise = 0
@@ -57,10 +69,10 @@ c
         n1 = n1 - 1
         if (m .ne. nfac) goto 3
     5 continue
-      prho = dble(ifr) / dble(nfac)
+      pv = dble(ifr) / dble(nfac)
       return
 c
-c        Evaluation by Edgeworth series expansion
+c     Evaluation by Edgeworth series expansion
 c
     6 b = one / dble(n)
       x = (six * (dble(js) - one) * b / (one / (b * b) -one) -
@@ -70,10 +82,10 @@ c
      $  + b * (c5 + c6 * b) - y * b * (c7 + c8 * b
      $  - y * (c9 - c10 * b + y * b * (c11 - c12 * y)))))
 c
-c      Call to algorithm AS 66
+c     Call to algorithm AS 66
 c
-      prho = u / exp(y / two) + alnorm(x, .true.)
-      if (prho .lt. zero) prho = zero
-      if (prho .gt. one) prho = one
+      pv = u / exp(y / two) + alnorm(x, .true.)
+      if (pv .lt. zero) pv = zero
+      if (pv .gt. one) pv = one
       return
       end

@@ -1,3 +1,17 @@
+Sun Dec 12 11:42:19 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-21.
+
+	* R/{ansari.test.R,cor.test.R,fisher.test.R,shapiro.test.R}: Add
+	`PACKAGE = "ctest"' argument in all .C()/.Fortran() calls.
+
+	* R/cor.test.R: Use AS89 rather than the normal approximation for
+	computing p-values for Spearman's rho.
+
+	* man/cor.test.Rd: Change documentation accordingly.
+
+	* src/prho.f: Change from function to subroutine and fix a bug.
+
 Tue Dec  7 08:03:56 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.9-20.
