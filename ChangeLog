@@ -1,3 +1,9 @@
+Sat Sep 18 16:15:15 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-17.
+
+	* src/{ansari,fexact,kendall}.c: Replace `long' by `int'.
+
 Sat Apr 10 15:45:19 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.9-16.

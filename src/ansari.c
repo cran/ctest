@@ -14,9 +14,9 @@ errmsg(char *s)
 }
 
 static void
-w_init(long m, long n)
+w_init(int m, int n)
 {
-    long i;
+    int i;
     
     w = Calloc(m + 1, double **);
     if (!w)
@@ -29,9 +29,9 @@ w_init(long m, long n)
 }
 
 static void
-w_free(long m, long n)
+w_free(int m, int n)
 {
-    long i;
+    int i;
     for (i = m; i >= 0; i--) {
 	Free(w[i]);
     }
@@ -72,9 +72,9 @@ cansari(int k, int m, int n)
 }
 
 void
-dansari(long *len, double *x, long *m, long *n)
+dansari(int *len, double *x, int *m, int *n)
 {
-    long i;
+    int i;
 
     w_init(*m, *n);
     for (i = 0; i < *len; i++)
@@ -88,9 +88,9 @@ dansari(long *len, double *x, long *m, long *n)
 }
 
 void
-pansari(long *len, double *x, long *m, long *n)
+pansari(int *len, double *x, int *m, int *n)
 {
-    long i, j, l, u;
+    int i, j, l, u;
     double p, q;
 
     w_init(*m, *n);

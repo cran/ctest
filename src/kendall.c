@@ -15,7 +15,7 @@ errmsg(char *s) {
 }
 
 void
-kendall_tau(long *n, double *x, double *y, double *tau) {
+kendall_tau(int *n, double *x, double *y, double *tau) {
     double c = 0, vx = 0, vy = 0, sx, sy;
     int i, j;
 
@@ -61,8 +61,8 @@ ckendall(int k, int n) {
 }
 
 void
-dkendall(long *len, double *x, long *n) {
-    long i;
+dkendall(int *len, double *x, int *n) {
+    int i;
 
     w = Calloc(*n, double *);
     if (!w)
@@ -77,8 +77,8 @@ dkendall(long *len, double *x, long *n) {
 }
 
 void
-pkendall(long *len, double *x, long *n) {
-    long i, j;
+pkendall(int *len, double *x, int *n) {
+    int i, j;
     double p, q;
 
     w = Calloc(*n, double *);
