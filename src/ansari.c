@@ -5,6 +5,8 @@
 #include <S.h>
 #include <Mathlib.h>
 
+#include "ctest.h"
+
 static double ***w;
 
 static void
@@ -14,9 +16,9 @@ errmsg(char *s)
 }
 
 static void
-w_init(int m, int n)
+w_init(Sint m, Sint n)
 {
-    int i;
+    Sint i;
     
     w = Calloc(m + 1, double **);
     if (!w)
@@ -29,9 +31,9 @@ w_init(int m, int n)
 }
 
 static void
-w_free(int m, int n)
+w_free(Sint m, Sint n)
 {
-    int i;
+    Sint i;
     for (i = m; i >= 0; i--) {
 	Free(w[i]);
     }
@@ -72,9 +74,9 @@ cansari(int k, int m, int n)
 }
 
 void
-dansari(int *len, double *x, int *m, int *n)
+dansari(Sint *len, double *x, Sint *m, Sint *n)
 {
-    int i;
+    Sint i;
 
     w_init(*m, *n);
     for (i = 0; i < *len; i++)
@@ -88,9 +90,9 @@ dansari(int *len, double *x, int *m, int *n)
 }
 
 void
-pansari(int *len, double *x, int *m, int *n)
+pansari(Sint *len, double *x, Sint *m, Sint *n)
 {
-    int i, j, l, u;
+    Sint i, j, l, u;
     double p, q;
 
     w_init(*m, *n);

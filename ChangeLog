@@ -1,3 +1,14 @@
+Sat Sep 25 10:07:52 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.9-18.
+
+	* R/binom.test.R: Fix 2-sided p-values for extreme p.
+
+	* src/{ansari,fexact,kendall}.c: In fact, replace `long' by `Sint'
+	so that other S implementations could use the code, too.
+
+	* src/ctest.h: New file with Sint definitions.
+
 Sat Sep 18 16:15:15 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.9-17.

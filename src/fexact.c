@@ -6,50 +6,52 @@
 #include <math.h>
 #include <S.h>
 
+#include "ctest.h"
+
 #define	max(a, b) 		((a) < (b) ? (b) : (a))
 #define	min(a, b) 		((a) > (b) ? (b) : (a))
 #define	abs(x)			((x) >= 0 ? (x) : -(x))
 
-static int f2xact(int *nrow, int *ncol, double *table, int *ldtabl,
+static int f2xact(Sint *nrow, Sint *ncol, double *table, Sint *ldtabl,
 		  double *expect, double *percnt, double *emin, double
-		  *prt, double *pre, double *fact, int *ico, int
-		  *iro, int *kyy, int *idif, int *irn, int *key,
-		  int *ldkey, int *ipoin, double *stp, int *ldstp,
-		  int *ifrq, double *dlp, double *dsp, double *tm,
-		  int *key2, int *iwk, double *rwk);
-static int f3xact(int *nrow, int *irow, int *ncol,	int *icol,
-		  double *dlp, int *mm, double *fact, int *ico, int
-		  *iro, int *it, int *lb, int *nr, int *nt, int
-		  *nu, int *itc, int *ist, double *stv, double *alen,
+		  *prt, double *pre, double *fact, Sint *ico, Sint
+		  *iro, Sint *kyy, Sint *idif, Sint *irn, Sint *key,
+		  Sint *ldkey, Sint *ipoin, double *stp, Sint *ldstp,
+		  Sint *ifrq, double *dlp, double *dsp, double *tm,
+		  Sint *key2, Sint *iwk, double *rwk);
+static int f3xact(Sint *nrow, Sint *irow, Sint *ncol,	Sint *icol,
+		  double *dlp, Sint *mm, double *fact, Sint *ico, Sint
+		  *iro, Sint *it, Sint *lb, Sint *nr, Sint *nt, Sint
+		  *nu, Sint *itc, Sint *ist, double *stv, double *alen,
 		  double *tol);
-static int f4xact(int *nrow, int *irow, int *ncol, int *icol,
-		  double *dsp, double *fact, int *icstk, int *ncstk,
-		  int *lstk, int *mstk, int *nstk, int *nrstk, int
+static int f4xact(Sint *nrow, Sint *irow, Sint *ncol, Sint *icol,
+		  double *dsp, double *fact, Sint *icstk, Sint *ncstk,
+		  Sint *lstk, Sint *mstk, Sint *nstk, Sint *nrstk, Sint
 		  *irstk, double *ystk, double *tol);
-static int f5xact(double *pastp, double *tol, int *kval, int *key,
-		  int *ldkey, int *ipoin, double *stp, int *ldstp,
-		  int *ifrq, int *npoin, int *nr, int *nl, int
-		  *ifreq, int *itop, int *ipsh);
-static int f6xact(int *nrow, int *irow, int *iflag, int *kyy, int
-		  *key, int *ldkey, int *last, int *ipn);
-static int f7xact(int *nrow, int *imax, int *idif, int *k, int
-		  *ks, int *iflag);
-static int f8xact(int *irow, int *is, int *i1, int *izero, int
+static int f5xact(double *pastp, double *tol, Sint *kval, Sint *key,
+		  Sint *ldkey, Sint *ipoin, double *stp, Sint *ldstp,
+		  Sint *ifrq, Sint *npoin, Sint *nr, Sint *nl, Sint
+		  *ifreq, Sint *itop, Sint *ipsh);
+static int f6xact(Sint *nrow, Sint *irow, Sint *iflag, Sint *kyy, Sint
+		  *key, Sint *ldkey, Sint *last, Sint *ipn);
+static int f7xact(Sint *nrow, Sint *imax, Sint *idif, Sint *k, Sint
+		  *ks, Sint *iflag);
+static int f8xact(Sint *irow, Sint *is, Sint *i1, Sint *izero, Sint
 		  *new);
-static double f9xact(int *n, int *mm, int *ir, double *fact);
-static int f10act(int *nrow, int *irow, int *ncol, int *icol,
-		  double *val, int *xmin, double *fact, int *nd,
-		  int *ne, int *m);
-static int f11act(int *irow, int *i1, int *i2, int *new);
+static double f9xact(Sint *n, Sint *mm, Sint *ir, double *fact);
+static int f10act(Sint *nrow, Sint *irow, Sint *ncol, Sint *icol,
+		  double *val, Sint *xmin, double *fact, Sint *nd,
+		  Sint *ne, Sint *m);
+static int f11act(Sint *irow, Sint *i1, Sint *i2, Sint *new);
 static int prterr(int icode, char *mes);
-static int iwork(int *iwkmax, int *iwkpt, int *number, int *itype);
-static int isort(int *n, int *ix);
-static double gammds(double *y, double *p, int *ifault);
-static double alogam(double *x, int *ifault);
+static Sint iwork(Sint *iwkmax, Sint *iwkpt, Sint *number, Sint *itype);
+static int isort(Sint *n, Sint *ix);
+static double gammds(double *y, double *p, Sint *ifault);
+static double alogam(double *x, Sint *ifault);
 
 /* Table of constant values */
 
-static int c_2 = 2;
+static Sint c_2 = 2;
 
 
 /*
@@ -132,22 +134,22 @@ static int c_2 = 2;
   -----------------------------------------------------------------------
   */
 
-void fexact(int *nrow, int *ncol, double *table, int *ldtabl, double
+void fexact(Sint *nrow, Sint *ncol, double *table, Sint *ldtabl, double
 	    *expect, double *percnt, double *emin, double *prt, double
-	    *pre, int *workspace)
+	    *pre, Sint *workspace)
 {
     /* System generated locals */
-    int ikh;
+    Sint ikh;
 
     /* Local variables */
-    static int numb, iiwk;
-    static int irwk;
-    static int mult, ntot;    
-    static int i, j, k, ireal, ldkey;
+    static Sint numb, iiwk;
+    static Sint irwk;
+    static Sint mult, ntot;    
+    static Sint i, j, k, ireal, ldkey;
     static double amiss;
-    static int ldstp, i1, i2, i3, i4, i5, i6, i7, i8, i9, iwkpt;
-    static int i10, kk, i3a, i3b, i3c, iwkmax, i9a;
-    static int nco, nro;
+    static Sint ldstp, i1, i2, i3, i4, i5, i6, i7, i8, i9, iwkpt;
+    static Sint i10, kk, i3a, i3b, i3c, iwkmax, i9a;
+    static Sint nco, nro;
     static double *equiv;
     
     /* To increase workspace, increase the size of of rwrk and set the
@@ -155,14 +157,14 @@ void fexact(int *nrow, int *ncol, double *table, int *ldtabl, double
        When changing precision, the following declarations should not be
        changed.
        */
-    iwkmax = 2 * (int) (*workspace / 2);
+    iwkmax = 2 * (Sint) (*workspace / 2);
     
     equiv = Calloc(iwkmax / 2, double);
     if (!equiv) {
 	prterr(0, "Can not allocate specified workspace");
     }
 #define dwrk (equiv)
-#define iwrk ((int *)equiv)
+#define iwrk ((Sint *)equiv)
 #define rwrk ((float *)equiv)
 
     /*
@@ -196,7 +198,7 @@ void fexact(int *nrow, int *ncol, double *table, int *ldtabl, double
 	    if (table[i + j * *ldtabl] < 0.) {
 		prterr(2, "All elements of TABLE must be positive.");
 	    }
-	    ntot = (int) (ntot + table[i + j * *ldtabl]);
+	    ntot = (Sint) (ntot + table[i + j * *ldtabl]);
 	}
     }
     if (ntot == 0) {
@@ -306,16 +308,16 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
+int f2xact(Sint *nrow, Sint *ncol, double *table, Sint *ldtabl, double
 	   *expect, double *percnt, double *emin, double *prt, double
-	   *pre, double *fact, int *ico, int *iro, int *kyy, int
-	   *idif, int *irn, int *key, int *ldkey, int *ipoin, double
-	   *stp, int *ldstp, int *ifrq, double *dlp, double *dsp,
-	   double *tm, int *key2, int *iwk, double *rwk)
+	   *pre, double *fact, Sint *ico, Sint *iro, Sint *kyy, Sint
+	   *idif, Sint *irn, Sint *key, Sint *ldkey, Sint *ipoin, double
+	   *stp, Sint *ldstp, Sint *ifrq, double *dlp, double *dsp,
+	   double *tm, Sint *key2, Sint *iwk, double *rwk)
 {
     /* Initialized data */
-    /* IMAX is the largest representable int on the machine. */    
-    static int imax = INT_MAX;
+    /* IMAX is the largest representable Sint on the machine. */    
+    static Sint imax = SINT_MAX;
     /* AMISS is a missing value indicator which is returned when the
        probability is not defined. */
     static double amiss = -12345.;
@@ -330,27 +332,27 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
     double d1, d2;
 
     /* Local variables */
-    static int kval, kmax, jkey, last;
-    static int ipsh;
-    static int itmp;
+    static Sint kval, kmax, jkey, last;
+    static Sint ipsh;
+    static Sint itmp;
     static double dspt;
-    static int itop, jstp, ntot, jstp2, jstp3, jstp4, i, j, k, n,
+    static Sint itop, jstp, ntot, jstp2, jstp3, jstp4, i, j, k, n,
 	iflag, ncell, ifreq;
-    static int chisq;
-    static int ikkey;
+    static Sint chisq;
+    static Sint ikkey;
     static double pastp;
-    static int ikstp, k1;
+    static Sint ikstp, k1;
     static double dd, df;
-    static int ikstp2, i31, i32, i33, i34, i35, i36, i37, i38, i39,
+    static Sint ikstp2, i31, i32, i33, i34, i35, i36, i37, i38, i39,
 	i41, i42, i43, i44, i45, i46, i47, i48, ii, kb, kd, ks;
     static double pv;
-    static int ifault, i310, i311;
+    static Sint ifault, i310, i311;
     static double ddf;
-    static int nco, nrb;
+    static Sint nco, nrb;
     static double emn, drn, dro, obs;
-    static int ipn, ipo, itp, nro;
+    static Sint ipn, ipo, itp, nro;
     static double tmp, obs2, obs3;
-    static int nro2;
+    static Sint nro2;
 
     /* Parameter adjustments */
     table -= *ldtabl + 1;
@@ -424,8 +426,8 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
 	    if (table[i + j * *ldtabl] < -1e-4) {
 		prterr(2, "All elements of TABLE must be positive.");
 	    }
-	    iro[i] += (int) table[i + j * *ldtabl];
-	    ntot += (int) table[i + j * *ldtabl];
+	    iro[i] += (Sint) table[i + j * *ldtabl];
+	    ntot += (Sint) table[i + j * *ldtabl];
 	}
     }
 
@@ -441,7 +443,7 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
     for (i = 1; i <= *ncol; ++i) {
 	ico[i] = 0;
 	for (j = 1; j <= *nrow; ++j) {
-	    ico[i] += (int) table[j + i * *ldtabl];
+	    ico[i] += (Sint) table[j + i * *ldtabl];
 	}
     }
 
@@ -476,7 +478,7 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
 	} else {
 	    prterr(5, "The hash table key cannot be computed because "
 		   "the largest key\n"
-		   "is larger than the largest representable int.\n"
+		   "is larger than the largest representable Sint.\n"
 		   "The algorithm cannot proceed."
 		   "Reduce the workspace size, or use `exact = FALSE'.");
 	}
@@ -487,7 +489,7 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
     } else {
 	prterr(5, "The hash table key cannot be computed because "
 	       "the largest key\n"
-	       "is larger than the largest representable int.\n"
+	       "is larger than the largest representable Sint.\n"
 	       "The algorithm cannot proceed.\n"
 	       "Reduce the workspace size, or use `exact = FALSE'.");
 	goto L9000;
@@ -510,11 +512,11 @@ int f2xact(int *nrow, int *ncol, double *table, int *ldtabl, double
 	dd = 0.;
 	for (i = 1; i <= nro; ++i) {
 	    if (*nrow <= *ncol) {
-		dd += fact[(int) table[i + j * *ldtabl]];
-		ntot += (int) table[i + j * *ldtabl];
+		dd += fact[(Sint) table[i + j * *ldtabl]];
+		ntot += (Sint) table[i + j * *ldtabl];
 	    } else {
-		dd += fact[(int) table[j + i * *ldtabl]];
-		ntot += (int) table[j + i * *ldtabl];
+		dd += fact[(Sint) table[j + i * *ldtabl]];
+		ntot += (Sint) table[j + i * *ldtabl];
 	    }
 	}
 	obs = obs + fact[ico[j]] - dd;
@@ -688,7 +690,7 @@ L240:
     ipn = ipoin[ipo + ikkey];
     pastp = stp[ipn + ikstp];
     ifreq = ifrq[ipn + ikstp];
-    /* Compute shortest and intest path */
+    /* Compute shortest and longest path */
     if (k1 > 1) {
 	obs2 = obs - fact[ico[kb + 1]] - fact[ico[kb + 2]] - ddf;
 	for (i = 3; i <= k1; ++i) {
@@ -696,7 +698,7 @@ L240:
 	}
 	if (dlp[itp] > 0.) {
 	    dspt = obs - obs2 - ddf;
-	    /* Compute intest path */
+	    /* Compute longest path */
 	    dlp[itp] = 0.;
 	    f3xact(&nro2, &irn[nrb], &k1, &ico[kb + 1], &dlp[itp],
 		   &ntot, fact, &iwk[i31], &iwk[i32], &iwk[i33],
@@ -833,7 +835,7 @@ L9000:
      NCOL   - The number of columns in the table.  (Input) 
      ICOL   - Vector of length K containing the column sums for the 
               table.  (Input) 
-     DLP    - The intest path for the table.  (Output) 
+     DLP    - The longest path for the table.  (Output) 
      MM     - The total count in the table.  (Output) 
      FACT   - Vector containing the logarithms of factorials.  (Input) 
      ICO    - Work vector of length MAX(NROW,NCOL). 
@@ -851,27 +853,27 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f3xact(int *nrow, int *irow, int *ncol, int *icol, double *dlp,
-	   int *mm, double *fact, int *ico, int *iro, int *it, int
-	   *lb, int *nr, int *nt, int *nu, int *itc, int *ist,
+int f3xact(Sint *nrow, Sint *irow, Sint *ncol, Sint *icol, double *dlp,
+	   Sint *mm, double *fact, Sint *ico, Sint *iro, Sint *it, Sint
+	   *lb, Sint *nr, Sint *nt, Sint *nu, Sint *itc, Sint *ist,
 	   double *stv, double *alen, double *tol)
 {
     /* Initialized data */
 
-    static int ldst = 200;
-    static int nst = 0;
-    static int nitc = 0;
+    static Sint ldst = 200;
+    static Sint nst = 0;
+    static Sint nitc = 0;
 
     /* Local variables */
-    static int xmin;
-    static int i, k;
+    static Sint xmin;
+    static Sint i, k;
     static double v;
-    static int n11, n12, ii, nn, ks, ic1, ic2, nc1, nn1;
-    static int nr1, nco;
+    static Sint n11, n12, ii, nn, ks, ic1, ic2, nc1, nn1;
+    static Sint nr1, nco;
     static double val;
-    static int nct, ipn, irl, key, lev, itp, nro;
+    static Sint nct, ipn, irl, key, lev, itp, nro;
     static double vmn;
-    static int nrt, kyy, nc1s;
+    static Sint nrt, kyy, nc1s;
 
     /* Parameter adjustments */
     --stv;
@@ -1002,9 +1004,9 @@ L100:
     nr1 = nro - 1;
     nrt = iro[irl];
     nct = ico[1];
-    lb[1] = (int) ((double) ((nrt + 1) * (nct + 1)) /
+    lb[1] = (Sint) ((double) ((nrt + 1) * (nct + 1)) /
 		    (double) (nn + nr1 * nc1s + 1) - *tol) - 1;
-    nu[1] = (int) ((double) ((nrt + nc1s) * (nct + nr1)) /
+    nu[1] = (Sint) ((double) ((nrt + nc1s) * (nct + nr1)) /
 		    (double) (nn + nr1 + nc1s)) - lb[1] + 1;
     nr[1] = nrt - lb[1];
     /* Generate a node */
@@ -1027,9 +1029,9 @@ L120:
 	++lev;
 	nc1 = nco - lev;
 	nct = ico[lev];
-	lb[lev] = (int) ((double) ((nrt + 1) * (nct + 1)) /
+	lb[lev] = (Sint) ((double) ((nrt + 1) * (nct + 1)) /
 			  (double) (nn1 + nr1 * nc1 + 1) - *tol);
-	nu[lev] = (int) ((double) ((nrt + nc1) * (nct + nr1)) /
+	nu[lev] = (Sint) ((double) ((nrt + nc1) * (nct + nr1)) /
 			  (double) (nn1 + nr1 + nc1) - lb[lev] + 1);
 	nr[lev] = nrt - lb[lev];
 	goto L120;
@@ -1183,7 +1185,7 @@ L9000:
 /*
   ----------------------------------------------------------------------- 
   Name:       F4XACT 
-  Purpose:    Computes the intest path length for a given table. 
+  Purpose:    Computes the longest path length for a given table. 
   Usage:      CALL F4XACT (NROW, IROW, NCOL, ICOL, DSP, FACT, ICSTK, 
                           NCSTK, LSTK, MSTK, NSTK, NRSTK, IRSTK, YSTK, 
                           TOL) 
@@ -1208,20 +1210,20 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f4xact(int *nrow, int *irow, int *ncol, int *icol, double *dsp,
-	   double *fact, int *icstk, int *ncstk, int *lstk, int
-	   *mstk, int *nstk, int *nrstk, int *irstk, double *ystk,
+int f4xact(Sint *nrow, Sint *irow, Sint *ncol, Sint *icol, double *dsp,
+	   double *fact, Sint *icstk, Sint *ncstk, Sint *lstk, Sint
+	   *mstk, Sint *nstk, Sint *nrstk, Sint *irstk, double *ystk,
 	   double *tol)
 {
     /* System generated locals */
-    int ikh;
+    Sint ikh;
 
     /* Local variables */
-    static int istk, i, j, k, l, m, n;
+    static Sint istk, i, j, k, l, m, n;
     static double y;
-    static int mn, ic1, ir1, ict, nco;
+    static Sint mn, ic1, ir1, ict, nco;
     static double amx;
-    static int irt, nro;
+    static Sint irt, nro;
 
     /* Parameter adjustments */
     irstk -= *nrow + 1;
@@ -1454,15 +1456,15 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f5xact(double *pastp, double *tol, int *kval, int *key, int
-	   *ldkey, int *ipoin, double *stp, int *ldstp, int *ifrq,
-	   int *npoin, int *nr, int *nl, int *ifreq, int *itop,
-	   int *ipsh)
+int f5xact(double *pastp, double *tol, Sint *kval, Sint *key, Sint
+	   *ldkey, Sint *ipoin, double *stp, Sint *ldstp, Sint *ifrq,
+	   Sint *npoin, Sint *nr, Sint *nl, Sint *ifreq, Sint *itop,
+	   Sint *ipsh)
 {
     /* Local variables */
-    static int itmp;
+    static Sint itmp;
     static double test1, test2;
-    static int ird, ipn, itp;
+    static Sint ird, ipn, itp;
 
     /* Parameter adjustments */
     --nl;
@@ -1475,7 +1477,7 @@ int f5xact(double *pastp, double *tol, int *kval, int *key, int
 
     /* Function Body */
     if (*ipsh) {
-	/* Convert KVAL to int in range 1, ..., LDKEY. */
+	/* Convert KVAL to Sint in range 1, ..., LDKEY. */
 	ird = *kval % *ldkey + 1;
 	/* Search for an unused location */
 	for (itp = ird; itp <= *ldkey; ++itp) {
@@ -1621,10 +1623,10 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f6xact(int *nrow, int *irow, int *iflag, int *kyy, int *key,
-	   int *ldkey, int *last, int *ipn)
+int f6xact(Sint *nrow, Sint *irow, Sint *iflag, Sint *kyy, Sint *key,
+	   Sint *ldkey, Sint *last, Sint *ipn)
 {
-    static int kval, j;
+    static Sint kval, j;
 
     /* Parameter adjustments */
     --key;
@@ -1671,11 +1673,11 @@ L10:
   ----------------------------------------------------------------------- 
   */
 
-int f7xact(int *nrow, int *imax, int *idif, int *k, int *ks, int
+int f7xact(Sint *nrow, Sint *imax, Sint *idif, Sint *k, Sint *ks, Sint
 	   *iflag) 
 {
     /* Local variables */
-    static int i, m, k1, mm;
+    static Sint i, m, k1, mm;
 
     /* Parameter adjustments */
     --idif;
@@ -1780,9 +1782,9 @@ L9000:
   ----------------------------------------------------------------------- 
   */
 
-int f8xact(int *irow, int *is, int *i1, int	*izero, int *new)
+int f8xact(Sint *irow, Sint *is, Sint *i1, Sint	*izero, Sint *new)
 {
-    static int i;
+    static Sint i;
 
     /* Parameter adjustments */
     --new;
@@ -1826,10 +1828,10 @@ L40:
   -----------------------------------------------------------------------
   */
 
-double f9xact(int *n, int *mm, int *ir, double *fact)
+double f9xact(Sint *n, Sint *mm, Sint *ir, double *fact)
 {
     double d;
-    int k;
+    Sint k;
 
     /* Parameter adjustments */
     --ir;
@@ -1866,11 +1868,11 @@ double f9xact(int *n, int *mm, int *ir, double *fact)
   ----------------------------------------------------------------------- 
   */
 
-int f10act(int *nrow, int *irow, int *ncol, int *icol, double *val,
-	   int *xmin, double *fact, int *nd, int *ne, int *m)
+int f10act(Sint *nrow, Sint *irow, Sint *ncol, Sint *icol, double *val,
+	   Sint *xmin, double *fact, Sint *nd, Sint *ne, Sint *m)
 {
     /* Local variables */
-    static int i, is, ix, nrw1;
+    static Sint i, is, ix, nrw1;
 
     /* Parameter adjustments */
     --m;
@@ -1939,9 +1941,9 @@ int f10act(int *nrow, int *irow, int *ncol, int *icol, double *val,
   ----------------------------------------------------------------------- 
   */
 
-int f11act(int *irow, int *i1, int *i2, int	*new)
+int f11act(Sint *irow, Sint *i1, Sint *i2, Sint	*new)
 {
-    static int i;
+    static Sint i;
     
     /* Parameter adjustments */
     --new;
@@ -1993,9 +1995,9 @@ int prterr(int icode, char *mes)
               first element in the workspace array.  (Output) 
   -----------------------------------------------------------------------
   */
-int iwork(int *iwkmax, int *iwkpt, int *number, int *itype)
+Sint iwork(Sint *iwkmax, Sint *iwkpt, Sint *number, Sint *itype)
 {
-    int i;
+    Sint i;
 
     i = *iwkpt;
     if (*itype == 2 || *itype == 3) {
@@ -2016,16 +2018,16 @@ int iwork(int *iwkmax, int *iwkpt, int *number, int *itype)
 /*
   -----------------------------------------------------------------------
   Name:       ISORT 
-  Purpose:    Shell sort for an int vector. 
+  Purpose:    Shell sort for an Sint vector. 
   Usage:      CALL ISORT (N, IX) 
   Arguments: 
      N      - Lenth of vector IX.  (Input) 
      IX     - Vector to be sorted.  (Input/output) 
   -----------------------------------------------------------------------
   */
-int isort(int *n, int *ix)
+int isort(Sint *n, Sint *ix)
 {
-    static int ikey, i, j, m, il[10], kl, it, iu[10], ku;
+    static Sint ikey, i, j, m, il[10], kl, it, iu[10], ku;
 
     /* Parameter adjustments */
     --ix;
@@ -2121,10 +2123,10 @@ L9000:
   using and infinite series.
   */
 
-double gammds(double *y, double *p, int *ifault)
+double gammds(double *y, double *p, Sint *ifault)
 {
     static double a, c, f, g;
-    static int ifail;
+    static Sint ifail;
 
     /* Checks for the admissibility of arguments and value of F */
     *ifault = 1;
@@ -2181,7 +2183,7 @@ L10:
   Evaluates natural logarithm of gamma(x) for X greater than zero.
   */
 
-double alogam(double *x, int *ifault)
+double alogam(double *x, Sint *ifault)
 {
     /* Initialized data */
 

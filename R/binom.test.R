@@ -18,15 +18,23 @@ binom.test <- function(x, n, p = 0.5, alternative = "two.sided") {
                    less = pbinom(x, n, p),
                    greater = 1 - pbinom(x - 1, n, p),
                    two.sided = {
-                       d <- dbinom(x, n, p)
-                       if (x / n < p) {
-                           i <- seq(from = x + 1, to = n)
-                           y <- sum(dbinom(i, n, p) <= d)
-                           pbinom(x, n, p) + (1 - pbinom(n - y, n, p))
-                       } else {
-                           i <- seq(from = 0, to = x - 1)
-                           y <- sum(dbinom(i, n, p) <= d)
-                           pbinom(y - 1, n, p) + (1 - pbinom(x - 1, n, p))
+                       if (p == 0)
+                           (x == 0)
+                       else if (p == 1)
+                           (x == n)
+                       else {
+                           d <- dbinom(x, n, p)
+                           if (x / n < p) {
+                               i <- seq(from = x + 1, to = n)
+                               y <- sum(dbinom(i, n, p) <= d)
+                               pbinom(x, n, p) +
+                                   (1 - pbinom(n - y, n, p))
+                           } else {
+                               i <- seq(from = 0, to = x - 1)
+                               y <- sum(dbinom(i, n, p) <= d)
+                               pbinom(y - 1, n, p) +
+                                   (1 - pbinom(x - 1, n, p))
+                           }
                        }
                    })
   
